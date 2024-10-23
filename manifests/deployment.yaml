@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-deploy
+  labels:
+    app: demo-deploy
+    kubernetes.azure.com/generator: devhub
+  namespace: d-demo1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-deploy
+  template:
+    metadata:
+      labels:
+        app: demo-deploy
+    spec:
+      containers:
+        - name: demo-deploy
+          image: keisukeacr.azurecr.io/sum:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
